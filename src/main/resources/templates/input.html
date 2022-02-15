@@ -41,7 +41,7 @@
             }
 
             // 年齢チェック
-            if (checkNumberRange(inputForm.age, 20, 30) == false) {
+            if (checkNumberRange(inputForm.age, 20, 30, false) == false) {
                 // 背景色を変更する
                 inputForm.age.style.backgroundColor = COLOR_ERROR_BACKGROUND;
                 // エラーメッセージ
@@ -50,12 +50,12 @@
                 result = false;
             }
 
-            // 円周率チェック
-            if (checkNumberRange(inputForm.pi, 3.14, 3.14) == false) {
+            // 体重チェック
+            if (checkNumberRange(inputForm.pi, 1, 200, true) == false) {
                 // 背景色を変更する
                 inputForm.pi.style.backgroundColor = COLOR_ERROR_BACKGROUND;
                 // エラーメッセージ
-                errorMessage += "円周率が不正です。\n";
+                errorMessage += "体重が不正です。\n";
                 // 結果に失敗をセット
                 result = false;
             }
@@ -82,17 +82,17 @@
         名字：<input type="text" name="lastname" required><br/>
         名前：<input type="text" name="firstname" pattern=".{2,5}" title="2文字以上5以下で入力してください。" required ><br/>
         年齢：<input type="text" name="age" maxlenght="3" pattern="^[1-9][0-9]*$" title="整数のみ"  required><br/>
-        円周率：<input type="text" name="pi" maxlenght="3" pattern="^([1-9]\d*|0)(\.\d+)?$" title="数値のみ（少数点あり）"  required><br/>
+        体重：<input type="text" name="pi" maxlenght="3" pattern="^([1-9]\d*|0)(\.\d+)?$" title="数値のみ（少数点あり）"  required><br/>
         <input type="submit" value="登録">
     </form>
 
     <h1>Javascript入力チェック</h1>
     <div id="message"></div>
     <form id="inputForm" role="form" th:object="${selectForm}" method="post">
-        名字：<input type="text" name="lastname" maxlenght="5" ><br/>
-        名前：<input type="text" name="firstname" maxlenght="5" ><br/>
-        年齢：<input type="text" name="age" maxlenght="3" pattern="^[1-9][0-9]*$" required><br/>
-        円周率：<input type="text" name="pi" maxlenght="3" pattern="^([1-9]\d*|0)(\.\d+)?$"><br/>
+        名字：<input type="text" name="lastname"><br/>
+        名前：<input type="text" name="firstname"><br/>
+        年齢：<input type="text" name="age"><br/>
+        体重：<input type="text" name="pi"><br/>
         <button type="button" th:onclick="|inputCheck('/register')|">登録</button>
     </form>
 </body>

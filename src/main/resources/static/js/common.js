@@ -7,11 +7,21 @@ var COLOR_DEFAULT_BACKGROUND = '#FFFFFF' ;
 var COLOR_ERROR_BACKGROUND = '#ffc0cb' ;
 
 /**
+ * 数値判定（符号なし整数）
+ * @param  {Object} val inputオブジェクト
+ * @return {Boolean} true:数値、false:数値外
+ */
+ function isNumber(val) {
+  var regexp = new RegExp(/^[-]?([1-9]\d*|0)$/);
+  return regexp.test(val);
+}
+
+/**
  * 数値判定（符号なし小数）
  * @param  {Object} val inputオブジェクト
  * @return {Boolean} true:数値、false:数値外
  */
-function isNumber(val) {
+function isDecimal(val) {
     var regexp = new RegExp(/^([1-9]\d*|0)(\.\d+)?$/);
     return regexp.test(val);
 }
@@ -21,9 +31,10 @@ function isNumber(val) {
  * @param  {Object} targetElement 引数の説明
  * @param  {Number} min 最小値
  * @param  {Number} max 最大値
+ * @param  {Number} withDecimal 小数点あり
  * @return {Boolean} true:範囲内、false:範囲外
  */
-function checkNumberRange(targetElement, min, max) {
+function checkNumberRange(targetElement, min, max, withDecimal) {
     // 対象エレメントを取得
     if (!targetElement) {
       // 返り値に範囲外を返す
@@ -36,10 +47,19 @@ function checkNumberRange(targetElement, min, max) {
       return false;
     }
 
-    // 数値以外は不正
-    if (isNumber(targetElement.value) == false) {
-      // 返り値に範囲外を返す
-      return false;
+    if (withDecimal) {
+      // 数値以外は不正
+      if (isDecimal(targetElement.value) == false) {
+        // 返り値に範囲外を返す
+        return false;
+      }
+    }
+    else {
+      // 整数以外は不正
+      if (isNumber(targetElement.value) == false) {
+        // 返り値に範囲外を返す
+        return false;
+      }
     }
 
     // 範囲外は不正
