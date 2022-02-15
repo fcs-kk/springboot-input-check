@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head >
+</head>
+<script th:src="@{/js/common.js}"></script>
+<script>
+    // JavaScript
+    function inputCheck(path) {
+        var result = true;
+        var errorMessage = "";
+
+        // メッセージラベル取得
+        var msgbox = document.getElementById("message");
+
+        // 色の初期化
+        msgbox.style.color = COLOR_ERROR_MESSAGE;
+        inputForm.lastname.style.backgroundColor = COLOR_DEFAULT_BACKGROUND;
+        inputForm.firstname.style.backgroundColor = COLOR_DEFAULT_BACKGROUND;
+        inputForm.age.style.backgroundColor = COLOR_DEFAULT_BACKGROUND;
+        inputForm.pi.style.backgroundColor = COLOR_DEFAULT_BACKGROUND;
+
+        do {
+            // 名字チェック
+            if (inputForm.lastname.value == "") {
+                // 背景色を変更する
+                inputForm.lastname.style.backgroundColor = COLOR_ERROR_BACKGROUND;
+                // エラーメッセージ
+                errorMessage += " 名字を入力してください。\n";
+                // 結果に失敗をセット
+                result = false;
+            }
+
+            // 名前チェック
+            if (inputForm.firstname.value == "") {
+                // 背景色を変更する
+                inputForm.firstname.style.backgroundColor = COLOR_ERROR_BACKGROUND;
+                // エラーメッセージ
+                errorMessage += " 名前を入力してください。\n";
+                // 結果に失敗をセット
+                result = false;
+            }
+
+            // 年齢チェック
+            if (checkNumberRange(inputForm.age, 20, 30) == false) {
+                // 背景色を変更する
+                inputForm.age.style.backgroundColor = COLOR_ERROR_BACKGROUND;
+                // エラーメッセージ
+                errorMessage += "年齢が不正です。\n";
+                // 結果に失敗をセット
+                result = false;
+            }
+
+            // 円周率チェック
+            if (checkNumberRange(inputForm.pi, 3.14, 3.14) == false) {
+                // 背景色を変更する
+                inputForm.pi.style.backgroundColor = COLOR_ERROR_BACKGROUND;
+                // エラーメッセージ
+                errorMessage += "円周率が不正です。\n";
+                // 結果に失敗をセット
+                result = false;
+            }
+
+        } while(false);
+
+        // エラーをセット
+        msgbox.innerText = errorMessage;
+
+        if (result) {
+            // ダウンロード開始
+            inputForm.action=path;
+            inputForm.method="post";
+            inputForm.submit();
+        }
+
+        // 結果を返す
+        return result;
+    }
+</script>
+<body>
+    <h1>入力チェック</h1>
+    <div id="message"></div>
+    <form id="inputForm" role="form" th:object="${selectForm}" method="post">
+        名字：<input type="text" name="lastname"><br/>
+        名前：<input type="text" name="firstname"><br/>
+        年齢：<input type="text" name="age"><br/>
+        円周率：<input type="text" name="pi"><br/>
+        <button type="button" th:onclick="|inputCheck('/register')|">登録</button>
+    </form>
+</body>
+</html>
