@@ -8,7 +8,7 @@ var COLOR_ERROR_BACKGROUND = '#ffc0cb' ;
 
 /**
  * 数値判定（符号なし整数）
- * @param  {Object} val inputオブジェクト
+ * @param  {Object} val 値
  * @return {Boolean} true:数値、false:数値外
  */
  function isNumber(val) {
@@ -18,7 +18,7 @@ var COLOR_ERROR_BACKGROUND = '#ffc0cb' ;
 
 /**
  * 数値判定（符号なし小数）
- * @param  {Object} val inputオブジェクト
+ * @param  {Object} val 値
  * @return {Boolean} true:数値、false:数値外
  */
 function isDecimal(val) {
@@ -28,10 +28,10 @@ function isDecimal(val) {
 
 /**
  * 値の範囲チェック
- * @param  {Object} targetElement 引数の説明
+ * @param  {Object} targetElement inputオブジェクト
  * @param  {Number} min 最小値
  * @param  {Number} max 最大値
- * @param  {Number} withDecimal 小数点あり
+ * @param  {Boolean} withDecimal 小数点あり
  * @return {Boolean} true:範囲内、false:範囲外
  */
 function checkNumberRange(targetElement, min, max, withDecimal) {
