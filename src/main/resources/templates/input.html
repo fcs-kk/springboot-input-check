@@ -77,13 +77,22 @@
     }
 </script>
 <body>
-    <h1>入力チェック</h1>
+    <h1>HTML5入力チェック</h1>
+    <form id="form1" role="form" th:object="${selectForm}" method="post">
+        名字：<input type="text" name="lastname" required><br/>
+        名前：<input type="text" name="firstname" pattern=".{2,5}" title="2文字以上5以下で入力してください。" required ><br/>
+        年齢：<input type="text" name="age" maxlenght="3" pattern="^[1-9][0-9]*$" title="整数のみ"  required><br/>
+        円周率：<input type="text" name="pi" maxlenght="3" pattern="^([1-9]\d*|0)(\.\d+)?$" title="数値のみ（少数点あり）"  required><br/>
+        <input type="submit" value="登録">
+    </form>
+
+    <h1>Javascript入力チェック</h1>
     <div id="message"></div>
     <form id="inputForm" role="form" th:object="${selectForm}" method="post">
-        名字：<input type="text" name="lastname"><br/>
-        名前：<input type="text" name="firstname"><br/>
-        年齢：<input type="text" name="age"><br/>
-        円周率：<input type="text" name="pi"><br/>
+        名字：<input type="text" name="lastname" maxlenght="5" ><br/>
+        名前：<input type="text" name="firstname" maxlenght="5" ><br/>
+        年齢：<input type="text" name="age" maxlenght="3" pattern="^[1-9][0-9]*$" required><br/>
+        円周率：<input type="text" name="pi" maxlenght="3" pattern="^([1-9]\d*|0)(\.\d+)?$"><br/>
         <button type="button" th:onclick="|inputCheck('/register')|">登録</button>
     </form>
 </body>
